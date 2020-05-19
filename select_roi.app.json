@@ -1,0 +1,127 @@
+{
+    "info": {
+        "name": "image_select_roi",
+        "version": "1.0.0",
+        "category": "image",
+        "keywords": ["image"],
+        "homepage": "https://answer.bogonets.com/",
+        "bugs": "https://answer.bogonets.com/",
+        "license": "Bogonet License",
+        "author": "wooruang",
+        "engines": ">=1.0.2",
+        "environment": {},
+        "titles": {
+            "en": "Image ROI Selection",
+            "ko": "이미지 관심 영역 선택"
+        },
+        "descriptions": {
+            "en": "Select a roi at a image",
+            "ko": "이미지에서 관심 영역을 선택한다."
+        },
+        "documentation_mime": "text",
+        "documentations": {},
+        "meta": {
+            "components": {
+                "body": [
+                    {
+                        "name": "viewImage",
+                        "props": {},
+                        "ref": "image",
+                        "style": ""
+                    },
+                    {
+                        "name": "drawCanvas",
+                        "props": {
+                            "limitShape": 1,
+                            "useShapes": [
+                                "rectangle"
+                            ]
+                        },
+                        "ref": "canvas",
+                        "style": ""
+                    }
+                ],
+                "top": [
+                    {
+                        "align": "left",
+                        "name": "signal-button",
+                        "props": {
+                            "color": "blue",
+                            "name": "signal",
+                            "propertyName": "roi",
+                            "signal": {
+                                "input_queries": [],
+                                "name": "~${OWN}.preview",
+                                "output_queries": [
+                                    "${OWN}.preview?mime=image/jpeg"
+                                ]
+                            },
+                            "small": false
+                        },
+                        "ref": "signalButton",
+                        "style": "",
+                        "transData": "image.setSource"
+                    },
+                    {
+                        "align": "right",
+                        "name": "get-property-button",
+                        "props": {
+                            "color": "teal",
+                            "name": "get-property",
+                            "propertyName": "roi",
+                            "small": true
+                        },
+                        "ref": "getPropertyButton",
+                        "style": "",
+                        "transData": "canvas.setRectangles"
+                    },
+                    {
+                        "align": "right",
+                        "name": "set-property-button",
+                        "props": {
+                            "color": "teal",
+                            "name": "set-property",
+                            "propertyName": "roi",
+                            "small": true
+                        },
+                        "ref": "setPropertyButton",
+                        "sendData": "canvas.getRectangles",
+                        "style": ""
+                    }
+                ]
+            },
+            "gui": {
+                "name": "roi_setting"
+            }
+        }
+    },
+    "controls": {
+        "input": {
+            "list": [
+                {
+                    "name": "preview",
+                    "mimes": "image/jpeg"
+                }
+            ]
+        },
+        "output": "roi"
+    },
+    "props": [
+        {
+            "rule": "read_and_write",
+            "name": "roi",
+            "default_value": "0.,0.,1.,1.",
+            "type": "csv",
+            "required": true,
+            "valid": {},
+            "title": {
+                "en": "ROI",
+                "ko": "관심 영역"
+            },
+            "help": {
+                "en": "Region of Interest",
+                "ko": "관심 영역"
+            }
+        }
+    ]
+}
