@@ -2,25 +2,18 @@
 # @see <https://docs.scipy.org/doc/numpy-1.13.0/user/basics.types.html>
 
 import numpy as np
-import sys
 
 default_roi = (0., 0., 1., 1.)
 roi = default_roi
 
 
 def on_set(key, val):
-    # sys.stderr.write((f'on_set({key}, {val})'))
-    # sys.stderr.flush()
     if key == 'roi':
         global roi
         global default_roi
         try:
-            roi = list(map(lambda x : float(x), val.split(',')))
-            # sys.stderr.write((f'roi result : ({key}, {roi})'))
-            # sys.stderr.flush()
+            roi = list(map(lambda x: float(x), val.split(',')))
         except Exception as e:
-            # sys.stderr.write(e)
-            # sys.stderr.flush()
             roi = default_roi
 
 
@@ -43,7 +36,7 @@ def on_valid():
 
 def on_run(preview):
     return {
-        "roi": np.array(roi, dtype=np.float32)
+        "roi": np.array((roi[0], roi[1], roi[0]+roi[2], roi[1]+roi[3]), dtype=np.float32)
     }
 
 
