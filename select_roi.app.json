@@ -3,7 +3,9 @@
         "name": "image_select_roi",
         "version": "1.0.0",
         "category": "image",
-        "keywords": ["image"],
+        "keywords": [
+            "image"
+        ],
         "homepage": "https://answer.bogonets.com/",
         "bugs": "https://answer.bogonets.com/",
         "license": "Bogonet License",
@@ -32,9 +34,9 @@
                     {
                         "name": "drawCanvas",
                         "props": {
-                            "limitShape": 1,
+                            "limitShape": 10,
                             "useShapes": [
-                                "rectangle"
+                                "polygon"
                             ]
                         },
                         "ref": "canvas",
@@ -73,7 +75,7 @@
                         },
                         "ref": "getPropertyButton",
                         "style": "",
-                        "transData": "canvas.setRectangles"
+                        "transData": "canvas.setPolygons"
                     },
                     {
                         "align": "right",
@@ -85,7 +87,7 @@
                             "small": true
                         },
                         "ref": "setPropertyButton",
-                        "sendData": "canvas.getRectangles",
+                        "sendData": "canvas.getPolygons",
                         "style": ""
                     }
                 ]
@@ -110,7 +112,7 @@
         {
             "rule": "read_and_write",
             "name": "roi",
-            "default_value": "0.,0.,1.,1.",
+            "default_value": "",
             "type": "csv",
             "required": true,
             "valid": {},

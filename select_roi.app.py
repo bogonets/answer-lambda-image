@@ -3,7 +3,7 @@
 
 import numpy as np
 
-default_roi = (0., 0., 1., 1.)
+default_roi = []
 roi = default_roi
 
 
@@ -11,8 +11,16 @@ def on_set(key, val):
     if key == 'roi':
         global roi
         global default_roi
+        if not val:
+            return
+
+        rois = val.split('\n')
+
         try:
-            roi = list(map(lambda x: float(x), val.split(',')))
+            for r in filter(lambda x: x, rois):
+                roi.append(list(map(lambda x : float(x), r.split(','))))
+            # sys.stderr.write((f'roi result : ({key}, {roi})'))
+            # sys.stderr.flush()
         except Exception as e:
             roi = default_roi
 
@@ -20,10 +28,6 @@ def on_set(key, val):
 def on_get(key):
     if key == 'roi':
         return ','.join(map(lambda x: str(x), roi))
-
-
-def on_create():
-    return True
 
 
 def on_init():
