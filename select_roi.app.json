@@ -10,8 +10,15 @@
         "bugs": "https://answer.bogonets.com/",
         "license": "Bogonet License",
         "author": "wooruang",
+        "dependencies": [
+            {"type": "pip", "src": "numpy"},
+            {"type": "pip", "src": "opencv-python"}
+        ],
         "engines": ">=1.0.2",
-        "environment": {},
+        "environment": {
+            "type": "pyenv",
+            "name": "image"
+        },
         "titles": {
             "en": "Image ROI Selection",
             "ko": "이미지 관심 영역 선택"
@@ -109,6 +116,24 @@
         "output": "roi"
     },
     "props": [
+        {
+            "rule": "read_and_write",
+            "name": "point_type",
+            "default_value": "absolute",
+            "type": "str",
+            "required": true,
+            "valid": {
+                "list": "absolute;ratio"
+            },
+            "title": {
+                "en": "Type",
+                "ko": "좌표 타입"
+            },
+            "help": {
+                "en": "",
+                "ko": ""
+            }
+        },
         {
             "rule": "read_and_write",
             "name": "roi",

@@ -3,8 +3,12 @@
 
 import numpy as np
 
+TYPE_ABSOLUTE = 'absolute'
+TYPE_RATIO = 'ratio'
+
 default_roi = []
 roi = default_roi
+point_type = TYPE_ABSOLUTE
 
 
 def on_set(key, val):
@@ -17,17 +21,25 @@ def on_set(key, val):
         rois = val.split('\n')
 
         try:
+            roi = []
             for r in filter(lambda x: x, rois):
                 roi.append(list(map(lambda x : float(x), r.split(','))))
             # sys.stderr.write((f'roi result : ({key}, {roi})'))
             # sys.stderr.flush()
+
         except Exception as e:
             roi = default_roi
+    elif key == 'point_type':
+        global point_type
+        point_type = v
 
 
 def on_get(key):
     if key == 'roi':
-        return ','.join(map(lambda x: str(x), roi))
+        # return ','.join(map(lambda x: str(x), roi))
+        return str(roi)
+    elif key == 'point_type':
+        return point_type
 
 
 def on_init():
@@ -39,14 +51,17 @@ def on_valid():
 
 
 def on_run(preview):
-    return {
-        "roi": np.array((roi[0], roi[1], roi[0]+roi[2], roi[1]+roi[3]), dtype=np.float32)
-    }
+    h, w, c = preview.shape
 
+    result = roi
+    if point_type == TYPE_ABSOLUTE:
+        result = to_absolute(roi, w, h)
+    return {
+        "roi": np.array(result)
+    }
 
 def on_destroy():
     return True
 
-
-if __name__ == '__main__':
-    pass
+def to_absolute(roi, width, height):
+    return [[p * width if idx % 2 == 0 else p * height for idx, p in enumerate(r)] for r in roi]
