@@ -31,7 +31,7 @@ def on_set(key, val):
             roi = default_roi
     elif key == 'point_type':
         global point_type
-        point_type = v
+        point_type = val
 
 
 def on_get(key):
