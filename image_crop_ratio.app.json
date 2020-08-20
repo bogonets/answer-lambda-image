@@ -1,22 +1,22 @@
 {
     "info": {
-        "name": "image_crop_roi",
-        "version": "1.0.0",
+        "name": "image_crop_ratio",
+        "version": "1.0.1",
         "category": "image",
-        "keywords": ["image"],
+        "keywords": ["image", "crop", "ratio"],
         "homepage": "https://answer.bogonets.com/",
         "bugs": "https://answer.bogonets.com/",
         "license": "Bogonet License",
-        "author": "wooruang",
+        "author": "wooruang,zer0",
         "engines": ">=1.0.2",
         "environment": {},
         "titles": {
-            "en": "Image ROI Crop",
-            "ko": "이미지 관심 영역 잘라내기"
+            "en": "Ratio crop image",
+            "ko": "이미지 비율 자르기"
         },
         "descriptions": {
-            "en": "Crop a roi at a image",
-            "ko": "이미지에서 관심 영역을 잘라낸다."
+            "en": "Crop the ROI area in the image. (ratio)",
+            "ko": "이미지에서 관심 영역을 잘라낸다. (비율)"
         },
         "documentation_mime": "text",
         "documentations": {}
