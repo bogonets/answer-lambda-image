@@ -16,6 +16,12 @@ def print_out(message):
 
 
 def on_run(image: np.ndarray, roi: np.ndarray):
+    if not image.shape:
+        return {'output_image': None}
+
+    if not roi.shape:
+        return {'output_image': image}
+
     x1, y1, x2, y2 = roi[:4]
     h, w = image.shape[:2]
     crop_y1 = int(h*y1)

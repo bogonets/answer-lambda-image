@@ -51,6 +51,8 @@ def on_valid():
 
 
 def on_run(preview):
+    if not preview.shape:
+        return {'roi': None}
     h, w, c = preview.shape
 
     result = roi
