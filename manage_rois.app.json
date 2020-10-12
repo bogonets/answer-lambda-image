@@ -1,6 +1,6 @@
 {
     "info": {
-        "name": "image_select_roi",
+        "name": "control_rois",
         "version": "1.0.0",
         "category": "image",
         "keywords": [
