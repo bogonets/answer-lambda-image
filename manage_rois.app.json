@@ -65,18 +65,25 @@
                                     "${OWN}.preview?mime=image/jpeg"
                                 ]
                             },
-                            "small": false
+                            "small": true
                         },
                         "ref": "signalButton",
                         "style": "",
                         "transData": "image.setSource"
+                    },
+                    {
+                        "align": "right",
+                        "name": "rois-switch",
+                        "ref": "roisSwitch",
+                        "style": "",
+                        "transData": "canvas.setAllPolygons"
                     }
                 ],
                 "panel": [
                     {
-                        "name": "roisControlPanel",
-                        "props": { },
-                        "ref": "props",
+                        "name": "rois-control-panel",
+                        "ref": "roisControlPanel",
+                        "addProps": "roisControlPanel.addProps",
                         "style": ""
                     }
                 ]
