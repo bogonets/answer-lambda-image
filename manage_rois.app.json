@@ -1,15 +1,13 @@
 {
     "info": {
         "name": "manage_rois",
-        "version": "1.0.0",
+        "version": "0.1.0",
         "category": "image",
-        "keywords": [
-            "image"
-        ],
+        "keywords": ["image", "rois"],
         "homepage": "https://answer.bogonets.com/",
         "bugs": "https://answer.bogonets.com/",
         "license": "Bogonet License",
-        "author": "sunhongyi",
+        "author": "sunhongyi,zer0",
         "dependencies": [
             {"type": "pip", "src": "numpy"},
             {"type": "pip", "src": "opencv-python"}
@@ -20,12 +18,12 @@
             "name": "image"
         },
         "titles": {
-            "en": "Manage Rois",
-            "ko": "Rois 들을 관리한다"
+            "en": "RoI's manager",
+            "ko": "RoI's manager"
         },
         "descriptions": {
-            "en": "Manage Rois",
-            "ko": "Rois 들을 관리한다."
+            "en": "Manage multiple RoI(Region of interest).",
+            "ko": "복수의 관심 영역을 관리한다."
         },
         "documentation_mime": "text",
         "documentations": {},
@@ -102,7 +100,62 @@
                 }
             ]
         },
-        "output": ["rois", "sizes", "props", "snapshots", "previews"]
+        "output": ["rois", "sizes", "props", "snaps"]
     },
-    "props": []
+    "props": [
+        {
+            "rule": "read_and_write",
+            "name": "rois",
+            "default_value": "",
+            "type": "str",
+            "required": true,
+            "valid": {
+                "hide": true
+            },
+            "title": {
+                "en": "RoI points",
+                "ko": "RoI points"
+            },
+            "help": {
+                "en": "RoI's points json",
+                "ko": "RoI's points json"
+            }
+        },
+        {
+            "rule": "read_and_write",
+            "name": "props",
+            "default_value": "",
+            "type": "str",
+            "required": true,
+            "valid": {
+                "hide": true
+            },
+            "title": {
+                "en": "RoI properties",
+                "ko": "RoI properties"
+            },
+            "help": {
+                "en": "RoI's properties json",
+                "ko": "RoI's properties json"
+            }
+        },
+        {
+            "rule": "read_and_write",
+            "name": "snaps",
+            "default_value": "",
+            "type": "str",
+            "required": true,
+            "valid": {
+                "hide": true
+            },
+            "title": {
+                "en": "RoI snapshot",
+                "ko": "RoI snapshot"
+            },
+            "help": {
+                "en": "RoI's snapshot json",
+                "ko": "RoI's snapshot json"
+            }
+        }
+    ]
 }
