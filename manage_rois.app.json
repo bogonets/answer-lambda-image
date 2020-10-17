@@ -55,7 +55,7 @@
                         "props": {
                             "color": "blue",
                             "name": "signal",
-                            "propertyName": "roi",
+                            "propertyName": "infos",
                             "signal": {
                                 "input_queries": [],
                                 "name": "~${OWN}.preview",
@@ -75,7 +75,7 @@
                         "props": {
                             "color": "teal",
                             "name": "get-property",
-                            "propertyName": "roi",
+                            "propertyName": "infos",
                             "small": true
                         },
                         "ref": "getPropertyButton",
@@ -88,7 +88,7 @@
                         "props": {
                             "color": "teal",
                             "name": "set-property",
-                            "propertyName": "roi",
+                            "propertyName": "infos",
                             "small": true
                         },
                         "ref": "setPropertyButton",

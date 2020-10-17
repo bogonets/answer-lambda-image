@@ -22,6 +22,8 @@ rgbColorValue = "rgbColorValue"
 lineStyleColorEnable = "lineStyleColorEnable"
 lineStyleColorValue = "lineStyleColorValue"
 
+JPEG_BASE64_MIME_PREFIX = "data:image/jpeg;base64,"
+
 
 class JpegEncodeError(Exception):
 
@@ -100,7 +102,7 @@ class ManageRois:
 
     @staticmethod
     def encode_to_base64_jpeg(image: np.ndarray) -> str:
-        if image.size == 0:
+        if image is None or image.size == 0:
             return ''
         ret, jpeg = cv2.imencode('.jpg', image)
         if not ret:
@@ -111,7 +113,7 @@ class ManageRois:
     def decode_from_base64_jpeg(base64_text: str) -> np.ndarray:
         if not base64_text:
             return np.empty(0, dtype=np.uint8)
-        jpeg = base64.b64decode(base64_text.encode("UTF-8"))
+        jpeg = base64.b64decode(base64_text[len(JPEG_BASE64_MIME_PREFIX):].encode("UTF-8"))
         data = np.frombuffer(jpeg, dtype=np.uint8)
         return cv2.imdecode(data, cv2.IMREAD_COLOR)
 
