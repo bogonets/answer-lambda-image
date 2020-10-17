@@ -107,11 +107,16 @@ class ManageRois:
         ret, jpeg = cv2.imencode('.jpg', image)
         if not ret:
             raise JpegEncodeError()
-        return base64.b64encode(jpeg.tobytes()).decode('UTF-8')
+        result = base64.b64encode(jpeg.tobytes()).decode('UTF-8')
+        if not result:
+            return ''
+        return JPEG_BASE64_MIME_PREFIX + result
 
     @staticmethod
     def decode_from_base64_jpeg(base64_text: str) -> np.ndarray:
         if not base64_text:
+            return np.empty(0, dtype=np.uint8)
+        if JPEG_BASE64_MIME_PREFIX != base64_text[0:len(JPEG_BASE64_MIME_PREFIX)]:
             return np.empty(0, dtype=np.uint8)
         jpeg = base64.b64decode(base64_text[len(JPEG_BASE64_MIME_PREFIX):].encode("UTF-8"))
         data = np.frombuffer(jpeg, dtype=np.uint8)
