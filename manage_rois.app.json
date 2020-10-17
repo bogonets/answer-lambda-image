@@ -71,18 +71,35 @@
                     },
                     {
                         "align": "right",
-                        "name": "rois-switch",
-                        "ref": "roisSwitch",
+                        "name": "get-property-button",
+                        "props": {
+                            "color": "teal",
+                            "name": "get-property",
+                            "propertyName": "roi",
+                            "small": true
+                        },
+                        "ref": "getPropertyButton",
                         "style": "",
-                        "transData": "canvas.setAllPolygons"
+                        "transData": "panel.setRoisInfos"
+                    },
+                    {
+                        "align": "right",
+                        "name": "set-property-button",
+                        "props": {
+                            "color": "teal",
+                            "name": "set-property",
+                            "propertyName": "roi",
+                            "small": true
+                        },
+                        "ref": "setPropertyButton",
+                        "sendData": "panel.getRoisInfos",
+                        "style": ""
                     }
                 ],
                 "panel": [
                     {
                         "name": "rois-control-panel",
-                        "ref": "roisControlPanel",
-                        "addProps": "roisControlPanel.addProps",
-                        "style": ""
+                        "ref": "panel"
                     }
                 ]
             },
@@ -105,7 +122,7 @@
     "props": [
         {
             "rule": "read_and_write",
-            "name": "rois",
+            "name": "infos",
             "default_value": "",
             "type": "str",
             "required": true,
@@ -113,48 +130,12 @@
                 "hide": true
             },
             "title": {
-                "en": "RoI points",
-                "ko": "RoI points"
+                "en": "RoI infos",
+                "ko": "RoI infos"
             },
             "help": {
-                "en": "RoI's points json",
-                "ko": "RoI's points json"
-            }
-        },
-        {
-            "rule": "read_and_write",
-            "name": "props",
-            "default_value": "",
-            "type": "str",
-            "required": true,
-            "valid": {
-                "hide": true
-            },
-            "title": {
-                "en": "RoI properties",
-                "ko": "RoI properties"
-            },
-            "help": {
-                "en": "RoI's properties json",
-                "ko": "RoI's properties json"
-            }
-        },
-        {
-            "rule": "read_and_write",
-            "name": "snaps",
-            "default_value": "",
-            "type": "str",
-            "required": true,
-            "valid": {
-                "hide": true
-            },
-            "title": {
-                "en": "RoI snapshot",
-                "ko": "RoI snapshot"
-            },
-            "help": {
-                "en": "RoI's snapshot json",
-                "ko": "RoI's snapshot json"
+                "en": "RoI's infos json",
+                "ko": "RoI's infos json"
             }
         }
     ]
