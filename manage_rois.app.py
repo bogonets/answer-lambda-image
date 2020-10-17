@@ -111,35 +111,36 @@ class ManageRois:
     def decode_from_base64_jpeg(base64_text: str) -> np.ndarray:
         if not base64_text:
             return np.empty(0, dtype=np.uint8)
-        data = base64.b64decode(base64_text.encode("UTF-8"))
+        jpeg = base64.b64decode(base64_text.encode("UTF-8"))
+        data = np.frombuffer(jpeg, dtype=np.uint8)
         return cv2.imdecode(data, cv2.IMREAD_COLOR)
 
     @staticmethod
     def encode_to_properties(props: np.ndarray) -> dict:
         return {
-            greaterThanEnable: props[0] == 1,
+            greaterThanEnable: bool(int(props[0]) != 0),
             greaterThanValue: float(props[1]),
-            lessThanEnable: props[2] == 1,
+            lessThanEnable: bool(int(props[2]) != 0),
             lessThanValue: float(props[3]),
-            withinRangeEnable: props[4] == 1,
+            withinRangeEnable: bool(int(props[4]) != 0),
             withinRangeValue: {
                 "min": float(props[5]),
                 "max": float(props[6])
             },
-            outOfRangeEnable: props[7] == 1,
+            outOfRangeEnable: bool(int(props[7]) != 0),
             outOfRangeValue: {
                 "min": float(props[8]),
                 "max": float(props[9])
             },
-            thresholdEnable: props[10] == 1,
+            thresholdEnable: bool(int(props[10]) != 0),
             thresholdValue: float(props[11]),
-            rgbColorEnable: props[12] == 1,
+            rgbColorEnable: bool(int(props[12]) != 0),
             rgbColorValue: {
                 "r": float(props[13]),
                 "g": float(props[14]),
                 "b": float(props[15])
             },
-            lineStyleColorEnable: props[16] == 1,
+            lineStyleColorEnable: bool(int(props[16]) != 0),
             lineStyleColorValue: {
                 "r": float(props[17]),
                 "g": float(props[18]),
