@@ -100,6 +100,8 @@ class ManageRois:
 
     @staticmethod
     def encode_to_base64_jpeg(image: np.ndarray) -> str:
+        if image.size == 0:
+            return ''
         ret, jpeg = cv2.imencode('.jpg', image)
         if not ret:
             raise JpegEncodeError()
