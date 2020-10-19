@@ -157,7 +157,7 @@ class ManageRois:
             for p in infos[index]["points"]:
                 rois.append(p["x"])
                 rois.append(p["y"])
-            sizes.append(len(infos[index]["points"]))
+            sizes.append(len(infos[index]["points"])*2)
             props.append(ManageRois.decode_from_properties(infos[index]["property"]))
             snaps.append(ManageRois.decode_from_base64_jpeg(infos[index]["snapshotInBase64Jpeg"]))
 
