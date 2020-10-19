@@ -23,6 +23,18 @@ lineStyleColorEnable = "lineStyleColorEnable"
 lineStyleColorValue = "lineStyleColorValue"
 
 JPEG_BASE64_MIME_PREFIX = "data:image/jpeg;base64,"
+LOGGING_PREFIX = '[manage_rois] '
+LOGGING_SUFFIX = '\n'
+
+
+def print_out(message):
+    sys.stdout.write(LOGGING_PREFIX + message + LOGGING_SUFFIX)
+    sys.stdout.flush()
+
+
+def print_error(message):
+    sys.stderr.write(LOGGING_PREFIX + message + LOGGING_SUFFIX)
+    sys.stderr.flush()
 
 
 class JpegEncodeError(Exception):
@@ -38,52 +50,6 @@ class ManageRois:
         self.sizes: np.ndarray = np.empty(0)
         self.props: np.ndarray = np.empty(0)
         self.snaps: np.ndarray = np.empty(0)
-
-    # def set_rois(self, val: str):
-    #     rois_list = json.loads(val)
-    #     if not isinstance(rois_list, list):
-    #         raise TypeError('Root json is not a list type.')
-    #
-    #     points = []
-    #     sizes = []
-    #     for item in rois_list:
-    #         if not isinstance(item, list):
-    #             raise TypeError('list element is not a list type.')
-    #
-    #         for x, y in zip(item[0::2], item[1::2]):
-    #             points.append(float(x))
-    #             points.append(float(y))
-    #         sizes.append(int(len(item)/2))
-    #
-    #     self.rois = np.array(points, dtype=float)
-    #     self.sizes = np.array(sizes, dtype=float)
-    #
-    # def set_props(self, val: str):
-    #     props_list = json.loads(val)
-    #     if not isinstance(props_list, list):
-    #         raise TypeError('Root json is not a list type.')
-    #
-    #     props = []
-    #     for item in props_list:
-    #         if not isinstance(item, list):
-    #             raise TypeError('list element is not a str type.')
-    #         props.append([float(x) for x in item])
-    #
-    #     self.props = np.array(props, dtype=float)
-    #
-    # def set_snaps(self, val: str):
-    #     snaps_list = json.loads(val)
-    #     if not isinstance(snaps_list, list):
-    #         raise TypeError('Root json is not a list type.')
-    #
-    #     snaps = []
-    #     for item in snaps_list:
-    #         if not isinstance(item, str):
-    #             raise TypeError('list element is not a str type.')
-    #         data = base64.b64decode(item.encode("UTF-8"))
-    #         snaps.append(cv2.imdecode(data, cv2.IMREAD_COLOR))
-    #
-    #     self.snaps = np.stack(snaps)
 
     def to_rois(self):
         size = self.sizes.size
@@ -204,8 +170,10 @@ class ManageRois:
         result = {}
         rois = self.to_rois()
         for i in range(self.sizes.size):
+            xs = rois[i][0::2]
+            ys = rois[i][1::2]
             result[str(i)] = {
-                "points": [{"x": p[0], "y": p[1]} for p in rois[i]],
+                "points": [{"x": float(x), "y": float(y)} for x, y in zip(xs, ys)],
                 "property": ManageRois.encode_to_properties(self.props[i]),
                 "snapshotInBase64Jpeg": ManageRois.encode_to_base64_jpeg(self.snaps[i])
             }
