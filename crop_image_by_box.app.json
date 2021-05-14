@@ -1,0 +1,28 @@
+{
+    "info": {
+        "name": "crop_image_by_box_value",
+        "version": "1.0.1",
+        "category": "image",
+        "keywords": ["image", "crop", "cnn"],
+        "homepage": "https://answer.bogonets.com/",
+        "bugs": "https://answer.bogonets.com/",
+        "license": "Bogonet License",
+        "author": "ysna629",
+        "engines": ">=1.0.2",
+        "environment": {},
+        "titles": {
+            "en": "crop_image_by_box",
+            "ko": "crop_image_by_box"
+        },
+        "descriptions": {
+            "en": "Crop the image from the image to the value of the box",
+            "ko": "이미지에서 박스 값만큼 이미지를 자른다."
+        },
+        "documentation_mime": "text",
+        "documentations": {}
+    },
+    "controls": {
+        "input": ["source", "bbox"],
+        "output": "result"
+    }
+}
